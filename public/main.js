@@ -39,11 +39,11 @@ $('textarea').val($('textarea').val() + userName + '\n' ); // Это событ�
 	//$("#cam").attr("src","");
 	var element=document.getElementById(info.filename);
 	if(!element){
-		$('div#cameras').append('<div id="'+info.filename+'"><img src="'+img.src+'" id="'+info.filename+'" onerror="this.src=\'gold.gif\'"></div>');
+		$('div#cameras').append('<span style="display:block-inline" id="'+info.filename+'"><img src="'+img.src+'" id="img-'+info.filename+'" onerror="this.src=\'gold.gif\'"></span>');
 
 	} 
 	else {
-		$( "div#"+info.filename ).replaceWith( '<img src="'+img.src+'" id="'+info.filename+'" onerror="this.src=\'gold.gif\'">' );
+		$( "span#"+info.filename ).replaceWith( '<img src="'+img.src+'" id="'+info.filename+'" onerror="this.src=\'gold.gif\'">' );
 
 		//$('img#'+info.filename).attr("src","");
 		//$('img#'+info.filename).attr("src",img.src);
