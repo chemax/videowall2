@@ -1,0 +1,39 @@
+span{
+	width:800;
+	height:600;
+	display:inline-block;
+	margin: 10px;
+}
+
+.left_button{	
+	position:relative;
+	left:100px;
+	display: inline-block;
+    text-decoration: none;
+    padding: 7px 12px 7px 12px;
+	color: #333;
+	background-color:#999;
+	float:left;
+	bottom:80px;
+	display:none;
+	font-size:40px;
+}
+
+.right_button{
+	position:relative;
+	right:100px;
+	display: inline-block;
+    text-decoration: none;
+    padding: 7px 12px 7px 12px;
+	color: #333;
+	background-color:#999;
+	float:right;
+	bottom:80px;
+	display:none;
+	font-size:40px;
+}
+
+span:hover .left_button,
+span:hover .right_button{
+	display:block;
+}
