@@ -51,7 +51,9 @@ io.on('connection', function (socket) {
 		{
 			logger.info('send file ' + file );
 			fs.readFile(foldername + filename, function(err, buf){
-				socket.emit('image', {filename: filename, image: true, buffer: buf.toString('base64') });
+				if(typeof buf !== "undefined")
+				{socket.emit('image', {filename: filename, image: true, buffer: buf.toString('base64') });}
+				
 			});
 		}
 		else{
