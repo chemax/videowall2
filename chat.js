@@ -20,7 +20,7 @@ io.on('connection', function (socket) {
     //socket.emit('userName', name); // Отправляем текущему клиенту событие 'userName' с его ником (name) (Отправляем клиенту его юзернейм)
 
     socket.on('username', function (msg) {
-        logger.info(msg + ' connected');
+		logger.info(msg + ' connected');
     });
     socket.on('message', function (msg) { // Обработчик на событие 'message' и аргументом (msg) из переменной message
         logger.warn('-----------'); // Logging
@@ -32,11 +32,12 @@ io.on('connection', function (socket) {
     socket.on('files-block', function (msg) {
         //console.log(msg);
         userFilesList = msg;
-
+		logger.warn("users files: " + userFilesList);
         //const buf = new Buffer(['http://192.168.22.239/thumb/bak_cam201.jpg','http://192.168.22.239/thumb/bak_cam206.jpg','http://192.168.22.239/thumb/bak_cam213.jpg','http://192.168.22.239/thumb/bak_cam216.jpg']);
         fs.watch(foldername, (eventType, file) => {
-            logger.info(file + ' has changes');
-            if (checkFileArray(userFilesList, file)) {
+            //logger.info(file + ' has changes');
+			
+            if (checkFileArray(userFilesList, file.replace(".jpg", ""))) {
                 logger.info('send file ' + file);
                 fs.readFile(foldername + file, function(err, buf){
                     if(typeof buf !== "undefined")
@@ -46,36 +47,10 @@ io.on('connection', function (socket) {
         }});
 
     });
-    // fs.readdir(foldername, function (err, items) {
-    //     //logger.warn(items);
-    //     socket.emit('files', arrayComparison(items, blockedFiles));
-    // });
+
 });
 
 
-// fs.watch(foldername, (eventType, filename) => {
-// 	//logger.info(blockedFiles);
-// 	//logger.info(filename);
-// 	file = filename.replace(".jpg", "");
-// 	//console.log(checkFileArray(blockedFiles, file));
-// 	if(checkFileArray(blockedFiles, file))
-// 	{
-// 		logger.info('send file ' + file );
-// 		fs.readFile(foldername + filename, function(err, buf){
-// 			if(typeof buf !== "undefined")
-// 			{socket.emit('image', {filename: filename, image: true, buffer: buf.toString('base64') });}
-//
-// 		});
-// 	}
-// 	else{
-// 		logger.info('dont send file ' + file );
-// 	}
-//
-// });
-
-
-// })
-// ;
 
 var checkFileArray = function (fileArray, file) {
     if (typeof fileArray !== "undefined") {
